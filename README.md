@@ -3,6 +3,12 @@ Application for managing Palworld server via flask app.
 This has been tested to run on ubuntu server/ wsl.
 The application must be ran in the same enviorment as the Palworld server.
 
+Basic login information is:
+user: admin
+pass: admin
+
+change your password after login on!
+
 ## Installation
 
 ```bash
