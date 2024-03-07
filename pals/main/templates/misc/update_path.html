@@ -1,0 +1,34 @@
+{% extends 'forms.html' %}
+
+{% block column_class %}
+<div class="col-md-6">
+    {% endblock %}
+
+    {% block header %}
+    <h1>{% block title %}Path{% endblock %}</h1>
+    {% endblock %}
+
+    {% block content %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li class="alert alert-info">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('Configs.update_path', name=config_name) }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">{{ config_name }}:</label>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" class="form-control" name="new_path" value="" placeholder="New Path" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    {% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'forms.html' %}
+
+{% block column_class %}
+<div class="col-md-12">
+    {% endblock %}
+
+    {% block header %}
+    <h1>{% block title %}PalWorldSettings{% endblock %}</h1>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container mt-4">
+        <h1 class="mb-4">INI File Editor</h1>
+        <form method="post" action="{{ url_for('ini.update') }}">
+            <div class="row mx-auto">
+                {% for key, value in option_values.items() %}
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <label for="{{ key }}" class="form-label">{{ key }}</label>
+                    {% if value.startswith('"') and value.endswith('"') %}
+                    <input type="text" class="form-control" id="{{ key }}" name="{{ key }}" value="{{ value }}"
+                        onfocus="startEditing(this)" onblur="stopEditing(this)" oninput="updateValue(this)"
+                        onkeydown="handleKeyPress(event)" style="max-width: 200px;">
+                    {% else %}
+                    <input type="text" class="form-control" id="{{ key }}" name="{{ key }}" value="{{ value }}"
+                        style="max-width: 200px;">
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+        </form>
+    </div>
+
+
+    <script>
+        function startEditing(input) {
+            // Store the original value without quotes
+            input.dataset.originalValue = input.value.replace(/"/g, '');
+            // Display the value without quotes when focused
+            input.value = input.dataset.originalValue;
+        }
+
+        function stopEditing(input) {
+            // If the input is empty, restore the original value
+            if (input.value.trim() === '') {
+                input.value = `"${input.dataset.originalValue}"`;
+            } else {
+                // Add quotes back when the input loses focus
+                input.value = `"${input.value}"`;
+            }
+        }
+
+        function updateValue(input) {
+            // Update the displayed value without quotes during input
+            input.value = input.value.replace(/"/g, '');
+        }
+
+        function handleKeyPress(event) {
+            // Prevent form submission on "Enter" keypress
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        }
+    </script>
+    {% endblock %}

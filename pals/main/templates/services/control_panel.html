@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center mt-5">
+  <h1>Service Control Panel</h1>
+
+  {% if result %}
+  <p>Operation result: {{ result }}</p>
+  {% endif %}
+
+  {% if error %}
+  <p>Error: {{ error }}</p>
+  {% endif %}
+
+  {% if service_status == 'active' %}
+  <label for="">Service Status:</label>
+  <p style="color: rgb(81, 240, 112);">Online</p>
+  {% else %}
+  <label for="">Service Status:</label>
+  <p style="color: #f91f1fe5;">Offline</p>
+  {% endif %}
+
+
+  <div class="row justify-content-center">
+    <div class="col-6 col-md-2 mb-3">
+      <form action="/start-service" method="post" {% if service_status=='active' %}style="display: none;" {% endif %}>
+        <button class="btn btn-success w-100" type="submit">Start</button>
+      </form>
+    </div>
+
+    <div class="col-6 col-md-2 mb-3">
+      <form action="/restart-service" method="post">
+        <button class="btn btn-warning w-100" type="submit">Restart</button>
+      </form>
+    </div>
+
+    <div class="col-6 col-md-2 mb-3">
+      <form action="/stop-service" method="post" {% if service_status=='inactive' %}style="display: none;" {% endif %}>
+        <button class="btn btn-danger w-100" type="submit">Stop</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
