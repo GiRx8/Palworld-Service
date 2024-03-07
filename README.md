@@ -9,6 +9,15 @@ pass: admin
 
 change your password after login on!
 
+## systemd service dependant:
+This app is depedant on setting up palworld with systemd services.
+see this page for instructions.
+You may skip to Step 25 if you understand what's being done.
+
+https://pimylifeup.com/ubuntu-palworld-dedicated-server/
+
+
+
 ## Installation
 
 ```bash
