@@ -10,12 +10,11 @@
 
     {% block content %}
     <div class="container mt-4">
-        <h1 class="mb-4">INI File Editor</h1>
         <form method="post" action="{{ url_for('ini.update') }}">
             <div class="row mx-auto">
                 {% for key, value in option_values.items() %}
                 <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <label for="{{ key }}" class="form-label">{{ key }}</label>
+                    <label for="{{ key }}" class="form-label" style="font-size: 10px;">{{ key }}</label>
                     {% if value.startswith('"') and value.endswith('"') %}
                     <input type="text" class="form-control" id="{{ key }}" name="{{ key }}" value="{{ value }}"
                         onfocus="startEditing(this)" onblur="stopEditing(this)" oninput="updateValue(this)"
