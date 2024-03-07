@@ -81,7 +81,7 @@ steam   ALL=(ALL) NOPASSWD: /bin/systemctl start palworld.service, /bin/systemct
 ```
 
 ## Images
-![alt text](https://i.postimg.cc/xfNT6K2W/palworld.png)
+![alt text](https://i.postimg.cc/TYC2M8tP/Screenshot-2024-03-07-133949.png)
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
