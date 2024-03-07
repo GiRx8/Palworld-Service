@@ -1,2 +1,14 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+/pals/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.pyo
+*.pyz
+*.pyzw
+
