@@ -10,20 +10,16 @@ bp = Blueprint('main', __name__)
 @bp.route('/')
 @admin_required
 def home():
-    # Query for 'configs' table
     g.db = get_db()
     cursor_path = g.db.execute("SELECT name, path FROM configs")
     results_path = cursor_path.fetchall()
 
-    # Query for 'user' table
     cursor_user = g.db.execute("SELECT username, is_admin FROM user")
     results_user = cursor_user.fetchall()
 
-    # Close the cursor (not necessary when using 'with' statement) 
     cursor_path.close()
     cursor_user.close()
 
-    #Server status notification
     service_status = get_service_status()
     result = request.args.get('result')
     error = request.args.get('error')

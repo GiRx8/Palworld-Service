@@ -1,6 +1,6 @@
 from flask import Blueprint, current_app, render_template, request, url_for, redirect
 import re
-from main.configurations.config import Config  # Import the Config class
+from main.configurations.config import Config
 from main.auth import admin_required
 from main.db import get_db
 

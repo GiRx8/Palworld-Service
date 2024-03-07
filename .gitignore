@@ -1,4 +1,5 @@
 pals/venv
 pals/__pycache__
 pals/main/__pycache__
+pals/main/utils/__pycache__
 
