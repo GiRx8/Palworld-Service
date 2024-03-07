@@ -22,8 +22,8 @@ https://pimylifeup.com/ubuntu-palworld-dedicated-server/
 
 ```bash
 sudo mkdir -p /home/app
-sudo curl -LJO https://github.com/GiRx8/Palworld-Service/archive/refs/tags/latest.tar.gz
-sudo tar -xzf Palworld-Service-latest.tar.gz -C /home/app --strip-components=1
+sudo curl -LJO https://github.com/GiRx8/Palworld-Service/archive/refs/tags/v0.1.1.tar.gz
+sudo tar -xzf Palworld-Service-0.1.1.tar.gz -C /home/app --strip-components=1
 cd /home/app
 ```
 
