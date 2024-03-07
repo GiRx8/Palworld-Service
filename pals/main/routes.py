@@ -14,7 +14,7 @@ def home():
     cursor_path = g.db.execute("SELECT name, path FROM configs")
     results_path = cursor_path.fetchall()
 
-    cursor_user = g.db.execute("SELECT username, is_admin FROM user")
+    cursor_user = g.db.execute("SELECT id, username, is_admin FROM user")
     results_user = cursor_user.fetchall()
 
     cursor_path.close()
