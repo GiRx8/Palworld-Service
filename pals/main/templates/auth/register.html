@@ -20,6 +20,10 @@
       <label for="password" class="form-label visually-hidden">Password</label>
       <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
     </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="isAdminCheckbox" name="is_admin">
+      <label class="form-check-label" for="isAdminCheckbox">Admin Rights</label>
+    </div>
     <button type="submit" class="btn btn-primary">Add User</button>
   </form>
-  {% endblock %}
+{% endblock %}

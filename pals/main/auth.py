@@ -39,6 +39,7 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        is_admin = 'is_admin' in request.form  # Check if the checkbox is checked
         db = get_db()
         error = None
 
@@ -50,8 +51,8 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "INSERT INTO user (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    "INSERT INTO user (username, password, is_admin) VALUES (?, ?, ?)",
+                    (username, generate_password_hash(password), is_admin),
                 )
                 db.commit()
             except db.IntegrityError:
@@ -116,6 +117,24 @@ def reset_password():
         flash(error)
 
     return render_template('auth/reset_password.html')
+
+@bp.route('/delete-user/<int:user_id>', methods=('GET', 'POST'))
+@admin_required
+def delete_user(user_id):
+    db = get_db()
+    error = None
+
+    if request.method == 'POST':
+        try:
+            db.execute('DELETE FROM user WHERE id = ?', (user_id,))
+            db.commit()
+        except db.IntegrityError:
+            error = 'Error deleting user.'
+        else:
+            flash('User deleted successfully.')
+            return redirect(url_for('main.home'))
+
+    return redirect(url_for('main.home', user_id=user_id, error=error))
 
 @bp.before_app_request
 def load_logged_in_user():

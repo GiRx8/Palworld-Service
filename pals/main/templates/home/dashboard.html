@@ -38,6 +38,7 @@
 
 {% block user %}
 <div class="container">
+  <div class="table-responsive">
   <table class="table table-striped table-hover mx-auto" style="max-width: 800px;">
     <thead>
       <tr>
@@ -58,12 +59,41 @@
           {% endif %}
         </td>
         <td>
-          <a href="{{ url_for('Configs.update_path', name=result['name']) }}" class="btn btn-primary">Update</a>
+          <div class="d-flex">
+            <a href="{{ url_for('auth.reset_password') }}" class="btn btn-warning">Pass</a>
+
+            <form method="post" action="{{ url_for('auth.delete_user', user_id=result['id']) }}"
+              id="deleteForm{{ result['id'] }}" class="ms-2">
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                data-bs-target="#deleteConfirmationModal{{ result['id'] }}">
+                Delete
+              </button>
+
+              <div class="modal fade" id="deleteConfirmationModal{{ result['id'] }}" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Confirm Deletion</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to delete this user?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+</div>
 </div>
 {% endblock %}
 
