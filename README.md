@@ -16,6 +16,38 @@ cd /home/app
 sudo chmod +x deploy.sh
 ./deploy.sh
 ```
+
+## After installation progress
+Please update your ip in the following file
+```bash
+sudo nano /etc/nginx/sites-available/PalService
+```
+```bash
+server {
+    listen 80;
+    server_name your_ip or domain_here;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /static {
+        alias /home/app/pals/main/static;
+    }
+
+    location /media {
+        alias /home/app/pals/main/media;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
+```
 ## Useful commands
 
 ```bash
